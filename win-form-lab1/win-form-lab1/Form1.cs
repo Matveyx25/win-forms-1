@@ -75,7 +75,33 @@ namespace win_form_lab1
         // Curve Bezie
         public void DrawBezie(Pen DrPen, Point[] P, int n)
         {
-            // по алгоритму из раздела 1.1 методических указаний
+            float step = 0.01f; // Шаг табуляции
+            //PointF[] result = new PointF[100]; // Массив точек кривой
+            //Point Pv1 = P[0];
+            //Point Pv2 = P[0];
+
+            int yPred = P[0].Y;
+            int xPred = P[0].X;
+           
+            //int j = 0;
+            for (float t = step; t < 1 + step / 2; t += step)
+            {
+                double ytmp = 0;
+                double xtmp = 0;
+
+                for (int i = 0; i < n; i++)
+                {
+                    double b = GetBernsteinPolynomial(i, n - 1, t);
+                    xtmp += P[i].X * b;
+                    ytmp += P[i].Y * b;
+                }
+                g.DrawLine(DrPen, xPred, yPred, (float)Math.Round(xtmp), (float)Math.Round(ytmp));
+                xPred = (int)Math.Round(xtmp);
+                yPred = (int)Math.Round(ytmp);
+            }
+
+            //Graphics g = pictureBox1.CreateGraphics();
+           
         }
 
         //------------------------------
@@ -88,7 +114,17 @@ namespace win_form_lab1
             return x;
         }
 
+
+        //----------------------
+
+        private double GetBernsteinPolynomial(int i, int n, float t)
+        {
+            return (Factorial(n) / (Factorial(i) * Factorial(n - i))) * (float)Math.Pow(t, i) * (float)Math.Pow(1 - t, n - i);
+        }
+
         //-----------------------------------------------------------------------------//
+
+
 
 
         //...........SLOTS...........//
@@ -133,9 +169,10 @@ namespace win_form_lab1
         {
             if (CountPoints >= np) return;
             ArPoints[CountPoints].X = e.X; ArPoints[CountPoints].Y = e.Y;
-            g.DrawEllipse(DrawPen, e.X - 2, e.Y - 2, 5, 5);
+           
             if (SplineType == 0) // Кубический сплайн
             {
+                g.DrawEllipse(DrawPen, e.X - 2, e.Y - 2, 5, 5);
                 switch (CountPoints)
                 {
                     case 1: // первый вектор
@@ -160,13 +197,19 @@ namespace win_form_lab1
             {
                 if (e.Button == MouseButtons.Right) // Конец ввода
                 {
-                    g.DrawLine(new Pen(Color.Magenta, 1), ArPoints[CountPoints - 1],
-                   ArPoints[CountPoints]);
-                    DrawBezie(new Pen(DrawPen.Color, 1), ArPoints, CountPoints);
-                    CountPoints = 0;
+                    if (CountPoints > 1)
+                    {
+                        //g.DrawLine(new Pen(Color.Magenta, 1), ArPoints[CountPoints - 1], ArPoints[CountPoints]);
+                        DrawBezie(new Pen(DrawPen.Color, 1), ArPoints, CountPoints);
+                        CountPoints = 0;
+                    }
+                       
+                       
+                    
                 }
                 else
                 {
+                    g.DrawEllipse(DrawPen, e.X - 2, e.Y - 2, 5, 5);
                     if (CountPoints > 0)
                         g.DrawLine(new Pen(Color.Magenta, 1),
                        ArPoints[CountPoints - 1], ArPoints[CountPoints]);
