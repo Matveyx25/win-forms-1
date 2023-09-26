@@ -23,8 +23,6 @@ namespace win_form_lab1
 
         Graphics g;
 
-
-
         Pen DrawPen = new Pen(Color.Black, 1);
         int SplineType;
         const int np = 20; // Размер массива
@@ -32,10 +30,8 @@ namespace win_form_lab1
         int CountPoints = 0; // Счетчик точек
 
         //------------------------------
-        
 
-
-        //------------------------------
+        ////////////////////////////////////////////////////
         //..............METHODS...............//
         public void DrawCubeSpline(Pen DrPen, Point[] P)
         {
@@ -71,19 +67,16 @@ namespace win_form_lab1
                 t = t + dt;
             }
         }
-        //------------------------------
+        ////////////////////////////////////////////////////
         // Curve Bezie
         public void DrawBezie(Pen DrPen, Point[] P, int n)
         {
-            float step = 0.01f; // Шаг табуляции
-            //PointF[] result = new PointF[100]; // Массив точек кривой
-            //Point Pv1 = P[0];
-            //Point Pv2 = P[0];
+            float step = 0.01f; // step T
+;
 
             int yPred = P[0].Y;
             int xPred = P[0].X;
-           
-            //int j = 0;
+
             for (float t = step; t < 1 + step / 2; t += step)
             {
                 double ytmp = 0;
@@ -98,10 +91,7 @@ namespace win_form_lab1
                 g.DrawLine(DrPen, xPred, yPred, (float)Math.Round(xtmp), (float)Math.Round(ytmp));
                 xPred = (int)Math.Round(xtmp);
                 yPred = (int)Math.Round(ytmp);
-            }
-
-            //Graphics g = pictureBox1.CreateGraphics();
-           
+            }           
         }
 
         //------------------------------
@@ -114,19 +104,17 @@ namespace win_form_lab1
             return x;
         }
 
-
-        //----------------------
-
+        //Function to get Bernstein polynominal
         private double GetBernsteinPolynomial(int i, int n, float t)
         {
-            return (Factorial(n) / (Factorial(i) * Factorial(n - i))) * (float)Math.Pow(t, i) * (float)Math.Pow(1 - t, n - i);
+            return (Factorial(n) / (Factorial(i) * Factorial(n - i))) 
+                * (float)Math.Pow(t, i) * (float)Math.Pow(1 - t, n - i);
         }
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+
 
         //-----------------------------------------------------------------------------//
-
-
-
-
         //...........SLOTS...........//
 
         // Обработчик события выбора цвета
@@ -155,7 +143,6 @@ namespace win_form_lab1
         {
             SplineType = comboBox1.SelectedIndex;
         }
-
 
         //-----Slot button1 is clicked---//
         private void button1_Click(object sender, EventArgs e)
@@ -203,9 +190,6 @@ namespace win_form_lab1
                         DrawBezie(new Pen(DrawPen.Color, 1), ArPoints, CountPoints);
                         CountPoints = 0;
                     }
-                       
-                       
-                    
                 }
                 else
                 {
@@ -217,11 +201,6 @@ namespace win_form_lab1
                 }
             }
 
-        }
-
-        private void pictureBox1_SizeChanged(object sender, EventArgs e)
-        {
-           
         }
     }
 }
