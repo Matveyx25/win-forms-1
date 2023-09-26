@@ -1,0 +1,11 @@
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\bin\Debug\win-form-lab1.exe.config
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\bin\Debug\win-form-lab1.exe
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\bin\Debug\win-form-lab1.pdb
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win-form-lab1.csproj.AssemblyReference.cache
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win-form-lab1.csproj.SuggestedBindingRedirects.cache
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win_form_lab1.Form1.resources
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win_form_lab1.Properties.Resources.resources
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win-form-lab1.csproj.GenerateResource.cache
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win-form-lab1.csproj.CoreCompileInputs.cache
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win-form-lab1.exe
+C:\Users\dark_\Desktop\University\3 курс\1 сем\ГСК\win-forms-1\win-form-lab1\win-form-lab1\obj\Debug\win-form-lab1.pdb
