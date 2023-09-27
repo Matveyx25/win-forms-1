@@ -18,13 +18,14 @@ namespace win_form_lab1
         {
             InitializeComponent();
             g = pictureBox1.CreateGraphics();
+            this.checkBox1.Enabled = false;
         }
         //-------------------//
 
         Graphics g;
 
-        Pen DrawPen = new Pen(Color.Black, 1);
-        int SplineType;
+        Pen DrawPen = new Pen(Color.White, 0);
+        int SplineType =-1;
         const int np = 20; // Размер массива
         Point[] ArPoints = new Point[np]; // Массив точек
         int CountPoints = 0; // Счетчик точек
@@ -71,7 +72,7 @@ namespace win_form_lab1
         // Curve Bezie
         public void DrawBezie(Pen DrPen, Point[] P, int n)
         {
-            float step = 0.01f; // step T
+            float step = 0.2f; // step T
 ;
 
             int yPred = P[0].Y;
@@ -84,7 +85,7 @@ namespace win_form_lab1
 
                 for (int i = 0; i < n; i++)
                 {
-                    double b = GetBernsteinPolynomial(i, n - 1, t);
+                    double b = GetBernsteinPolynomial(i, n -1, t);
                     xtmp += P[i].X * b;
                     ytmp += P[i].Y * b;
                 }
@@ -142,6 +143,11 @@ namespace win_form_lab1
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SplineType = comboBox1.SelectedIndex;
+            if(SplineType == 0)
+                this.checkBox1.Enabled = false;
+            else if(SplineType == 1)
+                this.checkBox1.Enabled = true;
+            
         }
 
         //-----Slot button1 is clicked---//
@@ -156,9 +162,10 @@ namespace win_form_lab1
         {
             if (CountPoints >= np) return;
             ArPoints[CountPoints].X = e.X; ArPoints[CountPoints].Y = e.Y;
-           
+            if (SplineType == -1 || comboBox2.SelectedIndex == -1) return;
             if (SplineType == 0) // Кубический сплайн
             {
+
                 g.DrawEllipse(DrawPen, e.X - 2, e.Y - 2, 5, 5);
                 switch (CountPoints)
                 {
@@ -180,8 +187,9 @@ namespace win_form_lab1
                         break;
                 }
             }
-            else // Безье
+            else if (SplineType == 1) // Безье
             {
+                this.checkBox1.Enabled = true;
                 if (e.Button == MouseButtons.Right) // Конец ввода
                 {
                     if (CountPoints > 1)
@@ -195,11 +203,13 @@ namespace win_form_lab1
                 {
                     g.DrawEllipse(DrawPen, e.X - 2, e.Y - 2, 5, 5);
                     if (CountPoints > 0)
-                        g.DrawLine(new Pen(Color.Magenta, 1),
+                        if (checkBox1.Checked == true)
+                            g.DrawLine(new Pen(Color.Magenta, 1),
                        ArPoints[CountPoints - 1], ArPoints[CountPoints]);
                     CountPoints++;
                 }
             }
+            else return;
 
         }
     }
